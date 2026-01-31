@@ -1,25 +1,87 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>جامعة سبأ - الريادة في التعليم العالي</title>
-    <meta name="description" content="جامعة سبأ - مؤسسة تعليمية رائدة في اليمن تقدم برامج أكاديمية متميزة في الطب والهندسة والحاسوب والإدارة">
+    <meta name="description"
+        content="جامعة سبأ - مؤسسة تعليمية رائدة في اليمن تقدم برامج أكاديمية متميزة في الطب والهندسة والحاسوب والإدارة">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
-        * { font-family: 'Cairo', sans-serif; }
-        html { scroll-behavior: smooth; }
-        .gradient-hero { background: linear-gradient(135deg, #1e3a5f 0%, #0d253f 50%, #1a365d 100%); }
-        .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
-        .nav-link { position: relative; }
-        .nav-link::after { content: ''; position: absolute; bottom: -4px; right: 0; width: 0; height: 2px; background: #d4af37; transition: width 0.3s; }
-        .nav-link:hover::after { width: 100%; }
-        .golden-gradient { background: linear-gradient(135deg, #d4af37, #f4d03f, #d4af37); }
-        .faculty-card { backdrop-filter: blur(10px); background: rgba(255,255,255,0.95); }
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .gradient-hero {
+            background: linear-gradient(135deg, #1e3a5f 0%, #0d253f 50%, #1a365d 100%);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: #d4af37;
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .golden-gradient {
+            background: linear-gradient(135deg, #d4af37, #f4d03f, #d4af37);
+        }
+
+        .faculty-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .modal-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
     </style>
 </head>
+
 <body class="bg-slate-50 text-slate-800">
 
     <!-- Navigation -->
@@ -27,7 +89,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 golden-gradient rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">س</div>
+                    <div
+                        class="w-12 h-12 golden-gradient rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                        س</div>
                     <div>
                         <span class="font-bold text-xl text-slate-800">جامعة سبأ</span>
                         <p class="text-xs text-slate-500">Saba University</p>
@@ -39,11 +103,21 @@
                     <a href="#faculties" class="nav-link text-slate-700 font-medium">الكليات</a>
                     <a href="#admission" class="nav-link text-slate-700 font-medium">القبول</a>
                     <a href="#contact" class="nav-link text-slate-700 font-medium">التواصل</a>
-                    <a href="#contact" class="px-6 py-2.5 golden-gradient text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all">سجّل الآن</a>
+                    <button onclick="openRegisterModal()"
+                        class="px-6 py-2.5 golden-gradient text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all">سجّل
+                        الآن</button>
                 </div>
-                <button onclick="toggleMobile()" class="md:hidden p-2">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-                </button>
+                <div class="flex items-center gap-3 md:hidden">
+                    <button onclick="openRegisterModal()"
+                        class="px-4 py-2 golden-gradient text-white rounded-full font-semibold text-sm shadow-lg">سجّل
+                        الآن</button>
+                    <button onclick="toggleMobile()" class="p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-4 space-y-3">
@@ -52,6 +126,9 @@
             <a href="#faculties" class="block py-2 text-slate-700 font-medium" onclick="toggleMobile()">الكليات</a>
             <a href="#admission" class="block py-2 text-slate-700 font-medium" onclick="toggleMobile()">القبول</a>
             <a href="#contact" class="block py-2 text-slate-700 font-medium" onclick="toggleMobile()">التواصل</a>
+            <button onclick="toggleMobile(); openRegisterModal();"
+                class="w-full py-3 golden-gradient text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all mt-2">سجّل
+                الآن</button>
         </div>
     </nav>
 
@@ -59,7 +136,8 @@
     <section id="home" class="gradient-hero min-h-screen flex items-center pt-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div class="text-center">
-                <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur rounded-full text-amber-300 text-sm font-medium mb-8">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur rounded-full text-amber-300 text-sm font-medium mb-8">
                     <span class="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></span>
                     التسجيل مفتوح للعام الدراسي الجديد
                 </div>
@@ -68,11 +146,16 @@
                     <br><span class="text-3xl md:text-4xl font-medium text-slate-300">الريادة في التعليم العالي</span>
                 </h1>
                 <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed">
-                    نقدم تعليماً أكاديمياً متميزاً يجمع بين الأصالة والمعاصرة، مع برامج متنوعة في الطب والهندسة والحاسوب والعلوم الإدارية
+                    نقدم تعليماً أكاديمياً متميزاً يجمع بين الأصالة والمعاصرة، مع برامج متنوعة في الطب والهندسة والحاسوب
+                    والعلوم الإدارية
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#faculties" class="px-8 py-4 golden-gradient text-white rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all">استكشف الكليات</a>
-                    <a href="#contact" class="px-8 py-4 bg-white/10 backdrop-blur text-white border border-white/30 rounded-full font-bold text-lg hover:bg-white/20 transition-all">تواصل معنا</a>
+                    <a href="#faculties"
+                        class="px-8 py-4 golden-gradient text-white rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all">استكشف
+                        الكليات</a>
+                    <a href="#contact"
+                        class="px-8 py-4 bg-white/10 backdrop-blur text-white border border-white/30 rounded-full font-bold text-lg hover:bg-white/20 transition-all">تواصل
+                        معنا</a>
                 </div>
             </div>
             <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
@@ -108,41 +191,55 @@
                 <div>
                     <h3 class="text-2xl font-bold text-slate-800 mb-6">جامعة سبأ... صرح أكاديمي متميز</h3>
                     <p class="text-slate-600 leading-relaxed mb-6">
-                        تأسست جامعة سبأ كمؤسسة تعليمية رائدة تهدف إلى تقديم تعليم عالٍ متميز يواكب التطورات العلمية والتقنية الحديثة، مع الحفاظ على القيم والهوية اليمنية الأصيلة.
+                        تأسست جامعة سبأ كمؤسسة تعليمية رائدة تهدف إلى تقديم تعليم عالٍ متميز يواكب التطورات العلمية
+                        والتقنية الحديثة، مع الحفاظ على القيم والهوية اليمنية الأصيلة.
                     </p>
                     <p class="text-slate-600 leading-relaxed mb-8">
-                        نفتخر بتقديم برامج أكاديمية شاملة تغطي مختلف التخصصات من العلوم الطبية والهندسية إلى العلوم الإدارية والإنسانية، مع كوادر تدريسية متميزة ومرافق حديثة.
+                        نفتخر بتقديم برامج أكاديمية شاملة تغطي مختلف التخصصات من العلوم الطبية والهندسية إلى العلوم
+                        الإدارية والإنسانية، مع كوادر تدريسية متميزة ومرافق حديثة.
                     </p>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
-                            <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-amber-600">✓</div>
+                            <div
+                                class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-amber-600">
+                                ✓</div>
                             <span class="font-medium text-slate-700">اعتماد أكاديمي</span>
                         </div>
                         <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
-                            <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-amber-600">✓</div>
+                            <div
+                                class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-amber-600">
+                                ✓</div>
                             <span class="font-medium text-slate-700">كوادر متميزة</span>
                         </div>
                         <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
-                            <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-amber-600">✓</div>
+                            <div
+                                class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-amber-600">
+                                ✓</div>
                             <span class="font-medium text-slate-700">مختبرات حديثة</span>
                         </div>
                         <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
-                            <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-amber-600">✓</div>
+                            <div
+                                class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-amber-600">
+                                ✓</div>
                             <span class="font-medium text-slate-700">بيئة تعليمية</span>
                         </div>
                     </div>
                 </div>
                 <div class="relative">
                     <div class="bg-gradient-to-br from-slate-100 to-slate-200 rounded-3xl p-8 relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-32 h-32 golden-gradient opacity-20 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                        <div
+                            class="absolute top-0 left-0 w-32 h-32 golden-gradient opacity-20 rounded-full -translate-x-1/2 -translate-y-1/2">
+                        </div>
                         <div class="space-y-6">
                             <div class="bg-white rounded-2xl p-6 shadow-lg">
                                 <h4 class="font-bold text-slate-800 mb-2">رؤيتنا</h4>
-                                <p class="text-slate-600 text-sm">أن نكون جامعة رائدة إقليمياً في التعليم والبحث العلمي وخدمة المجتمع</p>
+                                <p class="text-slate-600 text-sm">أن نكون جامعة رائدة إقليمياً في التعليم والبحث العلمي
+                                    وخدمة المجتمع</p>
                             </div>
                             <div class="bg-white rounded-2xl p-6 shadow-lg">
                                 <h4 class="font-bold text-slate-800 mb-2">رسالتنا</h4>
-                                <p class="text-slate-600 text-sm">إعداد كوادر بشرية مؤهلة علمياً ومهنياً قادرة على المنافسة في سوق العمل</p>
+                                <p class="text-slate-600 text-sm">إعداد كوادر بشرية مؤهلة علمياً ومهنياً قادرة على
+                                    المنافسة في سوق العمل</p>
                             </div>
                             <div class="bg-white rounded-2xl p-6 shadow-lg">
                                 <h4 class="font-bold text-slate-800 mb-2">قيمنا</h4>
@@ -166,10 +263,18 @@
 
             <!-- Campus Filter -->
             <div class="flex flex-wrap justify-center gap-3 mb-12">
-                <button onclick="filterCampus('all')" class="campus-btn active px-6 py-2 rounded-full font-medium transition-all bg-slate-800 text-white" data-campus="all">جميع الفروع</button>
-                <button onclick="filterCampus('asr')" class="campus-btn px-6 py-2 rounded-full font-medium transition-all bg-white text-slate-600 hover:bg-slate-100" data-campus="asr">حرم عصر</button>
-                <button onclick="filterCampus('zubayri')" class="campus-btn px-6 py-2 rounded-full font-medium transition-all bg-white text-slate-600 hover:bg-slate-100" data-campus="zubayri">شارع الزبيري</button>
-                <button onclick="filterCampus('rimas')" class="campus-btn px-6 py-2 rounded-full font-medium transition-all bg-white text-slate-600 hover:bg-slate-100" data-campus="rimas">جولة ريماس</button>
+                <button onclick="filterCampus('all')"
+                    class="campus-btn active px-6 py-2 rounded-full font-medium transition-all bg-slate-800 text-white"
+                    data-campus="all">جميع الفروع</button>
+                <button onclick="filterCampus('asr')"
+                    class="campus-btn px-6 py-2 rounded-full font-medium transition-all bg-white text-slate-600 hover:bg-slate-100"
+                    data-campus="asr">حرم عصر</button>
+                <button onclick="filterCampus('zubayri')"
+                    class="campus-btn px-6 py-2 rounded-full font-medium transition-all bg-white text-slate-600 hover:bg-slate-100"
+                    data-campus="zubayri">شارع الزبيري</button>
+                <button onclick="filterCampus('rimas')"
+                    class="campus-btn px-6 py-2 rounded-full font-medium transition-all bg-white text-slate-600 hover:bg-slate-100"
+                    data-campus="rimas">جولة ريماس</button>
             </div>
 
             <!-- Faculty Cards -->
@@ -179,69 +284,91 @@
                 <div class="faculty-card rounded-2xl p-6 border border-slate-200 card-hover" data-campus="asr">
                     <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center text-2xl mb-4">🔬</div>
                     <div class="flex items-center gap-2 mb-3">
-                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">حرم عصر</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">حرم
+                            عصر</span>
                     </div>
                     <h3 class="text-xl font-bold text-slate-800 mb-2">كلية العلوم الطبية</h3>
                     <p class="text-slate-500 text-sm mb-4">برامج طبية متقدمة تؤهلك للعمل في القطاع الصحي</p>
                     <div class="space-y-2">
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> الصيدلة السريرية</div>
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> الصيدلة العامة</div>
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> المختبرات الطبية</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> الصيدلة السريرية</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> الصيدلة العامة</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> المختبرات الطبية</div>
                     </div>
                 </div>
 
                 <!-- كلية طب الأسنان -->
                 <div class="faculty-card rounded-2xl p-6 border border-slate-200 card-hover" data-campus="zubayri">
-                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center text-2xl mb-4">🦷</div>
+                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center text-2xl mb-4">🦷
+                    </div>
                     <div class="flex items-center gap-2 mb-3">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">شارع الزبيري</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">شارع
+                            الزبيري</span>
                     </div>
                     <h3 class="text-xl font-bold text-slate-800 mb-2">كلية طب الأسنان</h3>
                     <p class="text-slate-500 text-sm mb-4">تخصص متميز في جراحة وعلاج الأسنان</p>
                     <div class="space-y-2">
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> جراحة الفم والأسنان</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> جراحة الفم والأسنان</div>
                     </div>
                     <p class="text-xs text-slate-400 mt-4">📍 أمام سبافون</p>
                 </div>
 
                 <!-- كلية الهندسة -->
                 <div class="faculty-card rounded-2xl p-6 border border-slate-200 card-hover" data-campus="asr">
-                    <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center text-2xl mb-4">⚙️</div>
+                    <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center text-2xl mb-4">⚙️
+                    </div>
                     <div class="flex items-center gap-2 mb-3">
-                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">حرم عصر</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">حرم
+                            عصر</span>
                     </div>
                     <h3 class="text-xl font-bold text-slate-800 mb-2">كلية الهندسة</h3>
                     <p class="text-slate-500 text-sm mb-4">برامج هندسية حديثة تواكب التطور التقني</p>
                     <div class="space-y-2">
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> هندسة الميكاترونكس</div>
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> الهندسة المعمارية</div>
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> هندسة الاتصالات</div>
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> الهندسة الكهربائية</div>
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> هندسة الحاسوب</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> هندسة الميكاترونكس</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> الهندسة المعمارية</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> هندسة الاتصالات</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> الهندسة الكهربائية</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> هندسة الحاسوب</div>
                     </div>
                 </div>
 
                 <!-- كلية الحاسوب -->
                 <div class="faculty-card rounded-2xl p-6 border border-slate-200 card-hover" data-campus="asr">
-                    <div class="w-14 h-14 bg-violet-100 rounded-xl flex items-center justify-center text-2xl mb-4">💻</div>
+                    <div class="w-14 h-14 bg-violet-100 rounded-xl flex items-center justify-center text-2xl mb-4">💻
+                    </div>
                     <div class="flex items-center gap-2 mb-3">
-                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">حرم عصر</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">حرم
+                            عصر</span>
                     </div>
                     <h3 class="text-xl font-bold text-slate-800 mb-2">كلية الحاسوب وتقنية المعلومات</h3>
                     <p class="text-slate-500 text-sm mb-4">تخصصات تقنية متقدمة لمستقبل رقمي</p>
                     <div class="space-y-2">
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> الأمن السيبراني</div>
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> تقنية المعلومات IT</div>
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> هندسة البرمجيات</div>
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> نظم المعلومات</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> الأمن السيبراني</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> تقنية المعلومات IT</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> هندسة البرمجيات</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> نظم المعلومات</div>
                     </div>
                 </div>
 
                 <!-- كلية العلوم الإدارية والإنسانية -->
                 <div class="faculty-card rounded-2xl p-6 border border-slate-200 card-hover" data-campus="asr">
-                    <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center text-2xl mb-4">📊</div>
+                    <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center text-2xl mb-4">📊
+                    </div>
                     <div class="flex items-center gap-2 mb-3">
-                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">حرم عصر</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">حرم
+                            عصر</span>
                     </div>
                     <h3 class="text-xl font-bold text-slate-800 mb-2">كلية العلوم الإدارية والإنسانية</h3>
                     <p class="text-slate-500 text-sm mb-4">برامج متنوعة في الإدارة والعلوم الإنسانية</p>
@@ -261,31 +388,42 @@
 
                 <!-- كلية الحقوق -->
                 <div class="faculty-card rounded-2xl p-6 border border-slate-200 card-hover" data-campus="asr">
-                    <div class="w-14 h-14 bg-amber-100 rounded-xl flex items-center justify-center text-2xl mb-4">⚖️</div>
+                    <div class="w-14 h-14 bg-amber-100 rounded-xl flex items-center justify-center text-2xl mb-4">⚖️
+                    </div>
                     <div class="flex items-center gap-2 mb-3">
-                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">حرم عصر</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">حرم
+                            عصر</span>
                     </div>
                     <h3 class="text-xl font-bold text-slate-800 mb-2">كلية الحقوق</h3>
                     <p class="text-slate-500 text-sm mb-4">دراسة قانونية شاملة تجمع الشريعة والقانون</p>
                     <div class="space-y-2">
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> الشريعة والقانون</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> الشريعة والقانون</div>
                     </div>
                 </div>
 
                 <!-- الدراسات العليا -->
-                <div class="faculty-card rounded-2xl p-6 border border-slate-200 card-hover lg:col-span-1" data-campus="rimas">
-                    <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center text-2xl mb-4">🎓</div>
+                <div class="faculty-card rounded-2xl p-6 border border-slate-200 card-hover lg:col-span-1"
+                    data-campus="rimas">
+                    <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center text-2xl mb-4">🎓
+                    </div>
                     <div class="flex items-center gap-2 mb-3">
-                        <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded-full">جولة ريماس</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded-full">جولة
+                            ريماس</span>
                     </div>
                     <h3 class="text-xl font-bold text-slate-800 mb-2">كلية الدراسات العليا</h3>
                     <p class="text-slate-500 text-sm mb-4">برامج الماجستير للتخصص والتطوير المهني</p>
                     <div class="space-y-2">
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> تقنية المعلومات IT</div>
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> القانون الخاص</div>
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> القانون العام</div>
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> إدارة الأعمال</div>
-                        <div class="flex items-center gap-2 text-sm text-slate-600"><span class="text-amber-500">●</span> المحاسبة</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> تقنية المعلومات IT</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> القانون الخاص</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> القانون العام</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> إدارة الأعمال</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><span
+                                class="text-amber-500">●</span> المحاسبة</div>
                     </div>
                 </div>
 
@@ -305,21 +443,29 @@
                 <!-- المستجدين -->
                 <div class="bg-gradient-to-br from-slate-50 to-slate-100 rounded-3xl p-8 border border-slate-200">
                     <div class="flex items-center gap-4 mb-6">
-                        <div class="w-12 h-12 golden-gradient rounded-xl flex items-center justify-center text-white text-xl">📋</div>
+                        <div
+                            class="w-12 h-12 golden-gradient rounded-xl flex items-center justify-center text-white text-xl">
+                            📋</div>
                         <h3 class="text-2xl font-bold text-slate-800">الطلاب المستجدين</h3>
                     </div>
                     <p class="text-slate-600 mb-6">الوثائق المطلوبة للتسجيل كطالب جديد:</p>
                     <ul class="space-y-4">
                         <li class="flex items-start gap-3">
-                            <div class="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-sm mt-0.5">✓</div>
+                            <div
+                                class="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-sm mt-0.5">
+                                ✓</div>
                             <span class="text-slate-700">شهادة الثانوية العامة (أصل + صورة)</span>
                         </li>
                         <li class="flex items-start gap-3">
-                            <div class="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-sm mt-0.5">✓</div>
+                            <div
+                                class="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-sm mt-0.5">
+                                ✓</div>
                             <span class="text-slate-700">صور شخصية عدد 4</span>
                         </li>
                         <li class="flex items-start gap-3">
-                            <div class="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-sm mt-0.5">✓</div>
+                            <div
+                                class="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-sm mt-0.5">
+                                ✓</div>
                             <span class="text-slate-700">صورة البطاقة الشخصية</span>
                         </li>
                     </ul>
@@ -327,21 +473,29 @@
                 <!-- المحولين -->
                 <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-8 border border-amber-200">
                     <div class="flex items-center gap-4 mb-6">
-                        <div class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center text-white text-xl">🔄</div>
+                        <div
+                            class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center text-white text-xl">
+                            🔄</div>
                         <h3 class="text-2xl font-bold text-slate-800">الطلاب المحولين</h3>
                     </div>
                     <p class="text-slate-600 mb-6">الوثائق المطلوبة للتحويل من جامعة أخرى:</p>
                     <ul class="space-y-4">
                         <li class="flex items-start gap-3">
-                            <div class="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 text-sm mt-0.5">✓</div>
+                            <div
+                                class="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 text-sm mt-0.5">
+                                ✓</div>
                             <span class="text-slate-700">كشف درجات معتمد من الجامعة السابقة</span>
                         </li>
                         <li class="flex items-start gap-3">
-                            <div class="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 text-sm mt-0.5">✓</div>
+                            <div
+                                class="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 text-sm mt-0.5">
+                                ✓</div>
                             <span class="text-slate-700">رسالة تحويل رسمية</span>
                         </li>
                         <li class="flex items-start gap-3">
-                            <div class="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 text-sm mt-0.5">✓</div>
+                            <div
+                                class="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 text-sm mt-0.5">
+                                ✓</div>
                             <span class="text-slate-700">جميع وثائق الطلاب المستجدين</span>
                         </li>
                     </ul>
@@ -363,22 +517,31 @@
                 <div>
                     <h3 class="text-2xl font-bold text-white mb-8">معلومات التواصل</h3>
                     <div class="space-y-6">
-                        <a href="tel:+967773377733" class="flex items-center gap-4 p-4 bg-white/5 rounded-2xl hover:bg-white/10 transition-all">
-                            <div class="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center text-amber-400 text-xl">📞</div>
+                        <a href="tel:+967773377733"
+                            class="flex items-center gap-4 p-4 bg-white/5 rounded-2xl hover:bg-white/10 transition-all">
+                            <div
+                                class="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center text-amber-400 text-xl">
+                                📞</div>
                             <div>
                                 <p class="text-slate-400 text-sm">الهاتف</p>
                                 <p class="text-white font-semibold text-lg direction-ltr">+967 773 377 733</p>
                             </div>
                         </a>
-                        <a href="mailto:info@sabauni.net" class="flex items-center gap-4 p-4 bg-white/5 rounded-2xl hover:bg-white/10 transition-all">
-                            <div class="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center text-amber-400 text-xl">✉️</div>
+                        <a href="mailto:info@sabauni.net"
+                            class="flex items-center gap-4 p-4 bg-white/5 rounded-2xl hover:bg-white/10 transition-all">
+                            <div
+                                class="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center text-amber-400 text-xl">
+                                ✉️</div>
                             <div>
                                 <p class="text-slate-400 text-sm">البريد الإلكتروني</p>
                                 <p class="text-white font-semibold">info@sabauni.net</p>
                             </div>
                         </a>
-                        <a href="https://saba.edu.ye" target="_blank" class="flex items-center gap-4 p-4 bg-white/5 rounded-2xl hover:bg-white/10 transition-all">
-                            <div class="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center text-amber-400 text-xl">🌐</div>
+                        <a href="https://saba.edu.ye" target="_blank"
+                            class="flex items-center gap-4 p-4 bg-white/5 rounded-2xl hover:bg-white/10 transition-all">
+                            <div
+                                class="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center text-amber-400 text-xl">
+                                🌐</div>
                             <div>
                                 <p class="text-slate-400 text-sm">الموقع الإلكتروني</p>
                                 <p class="text-white font-semibold">saba.edu.ye</p>
@@ -389,14 +552,26 @@
                     <div class="mt-8">
                         <p class="text-slate-400 mb-4">تابعنا على</p>
                         <div class="flex gap-4">
-                            <a href="https://wa.me/967773377733" target="_blank" class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center text-white hover:bg-green-600 transition-all">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            <a href="https://wa.me/967773377733" target="_blank"
+                                class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center text-white hover:bg-green-600 transition-all">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                                </svg>
                             </a>
-                            <a href="#" class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white hover:bg-blue-700 transition-all">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            <a href="#"
+                                class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white hover:bg-blue-700 transition-all">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                                </svg>
                             </a>
-                            <a href="#" class="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-500 rounded-xl flex items-center justify-center text-white hover:opacity-90 transition-all">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                            <a href="#"
+                                class="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-500 rounded-xl flex items-center justify-center text-white hover:opacity-90 transition-all">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                                </svg>
                             </a>
                         </div>
                     </div>
@@ -405,8 +580,10 @@
                         <h4 class="text-white font-bold mb-4">📍 فروعنا</h4>
                         <div class="space-y-3 text-slate-300 text-sm">
                             <p><span class="text-amber-400">●</span> <strong>حرم عصر:</strong> المقر الرئيسي</p>
-                            <p><span class="text-amber-400">●</span> <strong>شارع الزبيري:</strong> كلية طب الأسنان (أمام سبافون)</p>
-                            <p><span class="text-amber-400">●</span> <strong>جولة ريماس:</strong> كلية الدراسات العليا</p>
+                            <p><span class="text-amber-400">●</span> <strong>شارع الزبيري:</strong> كلية طب الأسنان
+                                (أمام سبافون)</p>
+                            <p><span class="text-amber-400">●</span> <strong>جولة ريماس:</strong> كلية الدراسات العليا
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -416,24 +593,36 @@
                     <form id="contact-form" onsubmit="handleSubmit(event)" class="space-y-5">
                         <div>
                             <label class="block text-sm font-medium text-slate-600 mb-2">الاسم الكامل</label>
-                            <input type="text" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all" placeholder="أدخل اسمك">
+                            <input type="text" required
+                                class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all"
+                                placeholder="أدخل اسمك">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-slate-600 mb-2">رقم الهاتف</label>
-                            <input type="tel" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all" placeholder="أدخل رقم هاتفك">
+                            <input type="tel" required
+                                class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all"
+                                placeholder="أدخل رقم هاتفك">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-slate-600 mb-2">البريد الإلكتروني</label>
-                            <input type="email" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all" placeholder="أدخل بريدك الإلكتروني">
+                            <input type="email"
+                                class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all"
+                                placeholder="أدخل بريدك الإلكتروني">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-slate-600 mb-2">الرسالة</label>
-                            <textarea rows="4" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all resize-none" placeholder="اكتب رسالتك هنا..."></textarea>
+                            <textarea rows="4" required
+                                class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all resize-none"
+                                placeholder="اكتب رسالتك هنا..."></textarea>
                         </div>
-                        <button type="submit" class="w-full py-4 golden-gradient text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all">إرسال الرسالة</button>
+                        <button type="submit"
+                            class="w-full py-4 golden-gradient text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all">إرسال
+                            الرسالة</button>
                     </form>
                     <div id="success-msg" class="hidden text-center py-8">
-                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-2xl mx-auto mb-4">✓</div>
+                        <div
+                            class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-2xl mx-auto mb-4">
+                            ✓</div>
                         <p class="text-lg font-medium text-slate-800">شكراً لتواصلك معنا!</p>
                         <p class="text-slate-500">سنرد عليك في أقرب وقت ممكن</p>
                     </div>
@@ -447,7 +636,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 golden-gradient rounded-lg flex items-center justify-center text-white font-bold">س</div>
+                    <div
+                        class="w-10 h-10 golden-gradient rounded-lg flex items-center justify-center text-white font-bold">
+                        س</div>
                     <span class="font-bold text-lg text-white">جامعة سبأ</span>
                 </div>
                 <p class="text-slate-400 text-sm">© 2026 جامعة سبأ. جميع الحقوق محفوظة.</p>
@@ -460,6 +651,29 @@
         </div>
     </footer>
 
+    <!-- Registration Modal -->
+    <div id="register-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4"
+        onclick="closeRegisterModal(event)">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div class="modal-content relative bg-white rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl"
+            onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between p-4 border-b border-slate-100">
+                <h3 class="text-xl font-bold text-slate-800">📝 التسجيل في جامعة سبأ</h3>
+                <button onclick="closeRegisterModal()"
+                    class="w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="p-0">
+                <iframe src="https://bot.coolify.ienm.store/my-typebot-6vmh9c6"
+                    style="border: none; width: 100%; height: 600px;"></iframe>
+            </div>
+        </div>
+    </div>
+
     <script>
         function toggleMobile() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
@@ -468,7 +682,7 @@
         function filterCampus(campus) {
             const cards = document.querySelectorAll('#faculty-grid > div');
             const btns = document.querySelectorAll('.campus-btn');
-            
+
             btns.forEach(btn => {
                 btn.classList.remove('bg-slate-800', 'text-white');
                 btn.classList.add('bg-white', 'text-slate-600');
@@ -495,23 +709,41 @@
                 document.getElementById('contact-form').reset();
             }, 4000);
         }
+
+        function openRegisterModal() {
+            document.getElementById('register-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeRegisterModal(e) {
+            if (e && e.target !== e.currentTarget) return;
+            document.getElementById('register-modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeRegisterModal();
+        });
     </script>
 
     <!-- Chatwoot -->
     <script>
-        (function(d,t) {
-            var BASE_URL="https://chatwoot.coolify.ienm.store";
-            var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=BASE_URL+"/packs/js/sdk.js";
+        (function (d, t) {
+            var BASE_URL = "https://chatwoot.coolify.ienm.store";
+            var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            g.src = BASE_URL + "/packs/js/sdk.js";
             g.async = true;
-            s.parentNode.insertBefore(g,s);
-            g.onload=function(){
+            s.parentNode.insertBefore(g, s);
+            g.onload = function () {
                 window.chatwootSDK.run({
                     websiteToken: 'rXcF6ar6vgFPDpdwatnGgRqL',
                     baseUrl: BASE_URL
                 })
             }
-        })(document,"script");
+        })(document, "script");
     </script>
+
 </body>
+
 </html>
